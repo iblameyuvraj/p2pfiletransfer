@@ -3,13 +3,12 @@ const http = require("http");
 const app = express();
 const path = require('path')
 
-// Serve static files from the build directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-// Define a catch-all route that serves the index.html file
-app.get('*',(req,res) => {
-  res.sendFile(__dirname + "/public/index.html")
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
 
 const server = http.createServer(app);
 const socket = require("socket.io");
